@@ -84,7 +84,7 @@ def DC(ticker, page):
         url_list.append(url_url)
 
     #  첫페이지
-    title_crawl(url_list)
+    title_crawl(url_list, ticker)
     
     k = 0
     while k < page :
@@ -98,7 +98,7 @@ def DC(ticker, page):
             url_list.append(url_url)
         url_list.pop(1) 
         
-        if title_crawl(url_list) == -1:
+        if title_crawl(url_list, ticker) == -1:
             break
         else:
             k += 1
