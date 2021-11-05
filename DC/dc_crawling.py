@@ -35,16 +35,15 @@ def title_crawl(ls, ticker):
             if j.find('td',{'class':'gall_writer ub-writer'}).text=='운영자':
                 pass
             else:
-                #제목
-                title = j.find('a').text
                 #날짜
-                date_tag = j.find('td',{'class':'gall_date'})
-                date_dict = date_tag.attrs
+                date_dict = j.find('td',{'class':'gall_date'}).attrs
 
                 if date_dict['title'][:10] <= DATE_STOP: 
                     return -1
                 else:
                     # Date.append(date_dict['title'])
+                    #제목
+                    title = j.find('a').text
                     #추천수
                     recommend_tag = j.find('td', class_='gall_recommend')
                     recommend = recommend_tag.text
@@ -84,7 +83,7 @@ def DC(ticker, page):
         url_list.append(url_url)
 
     #  첫페이지
-    title_crawl(url_list)
+    title_crawl(url_list, ticker)
     
     k = 0
     while k < page :
@@ -98,7 +97,7 @@ def DC(ticker, page):
             url_list.append(url_url)
         url_list.pop(1) 
         
-        if title_crawl(url_list) == -1:
+        if title_crawl(url_list, ticker) == -1:
             break
         else:
             k += 1
