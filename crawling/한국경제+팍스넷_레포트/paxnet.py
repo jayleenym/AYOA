@@ -44,8 +44,13 @@ for key in tickers.keys():
                 url =  f"http://www.paxnet.co.kr/stock/report/reportView?menuCode=2222&currentPageNo={p}&reportId={rid}&searchKey=stock&searchValue={tk}"
                 report_html = requests.get(url, headers=headers).content
                 rsoup = BeautifulSoup(report_html, 'lxml')
-                link = rsoup.select('#contents > div.cont-area > div.report-view > div.report-view-file > span > a')[0]['href']
-                file = rsoup.select('#contents > div.cont-area > div.report-view > div.report-view-file > span > a')[0].text.replace("\n","")
+                link = rsoup.select('#contents > div.cont-area > div.report-view > div.report-view-file > span > a')
+                file = rsoup.select('#contents > div.cont-area > div.report-view > div.report-view-file > span > a')
+                try:
+                    link = link[0]['href']
+                    file = file[0].text.replace("\n","")
+                except:
+                    continue
                 
                 paxnet.loc[len(paxnet)] = [key, type_name[i], date[i], title[i], price[i], opinion[i], offer[i], file]
                 
@@ -65,4 +70,4 @@ for key in tickers.keys():
                 os.remove(pdf_path)
             p += 1
 
-paxnet.to_csv('./팍스넷_crawling.csv', encoding = 'utf8')
+paxnet.to_csv('./팍스넷_crawling.csv', encoding = 'utf8', index=False)

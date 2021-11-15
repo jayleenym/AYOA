@@ -16,8 +16,8 @@ headers = {
 }
 
 for key in tickers.keys():
+    
     os.makedirs(key)
-    print(key)
     for tk in tqdm(tickers[key]):
         p = 1
         while 1:
@@ -59,4 +59,4 @@ for key in tickers.keys():
             except Exception:
                 break
 
-hankyung.to_csv('./한국경제_crawling.csv', encoding = 'utf8')
+hankyung.to_csv('./한국경제_crawling.csv', encoding = 'utf8', index=False)
