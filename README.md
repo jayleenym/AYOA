@@ -3,4 +3,6 @@
 - [노션링크](https://www.notion.so/yejin547/1308dcce015e4187907d70b80443a13c)
 
 ### 아키텍쳐
-![아키텍쳐](./전체 아키텍쳐.jpeg)
+<div align=center>
+ <img src='./전체 아키텍쳐.jpeg' width="800">
+</div>
