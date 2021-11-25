@@ -39,6 +39,7 @@ for key in tickers.keys():
                     link = report.find('a', title = True).get('href') 
 
                     hankyung.loc[len(hankyung)] = [key, date, title, sub, writer, publish, file]
+                    pdf_name = f"./{key}/{date}_{re.findall('([가-힇]+[(][0-9]+[)])', title)[0]}_{publish}.pdf"
 
                     # pdf download
                     resp = download(f"http://consensus.hankyung.com{link}", headers=headers)
@@ -49,7 +50,7 @@ for key in tickers.keys():
 
                     # pdf to text
                     parsed = parser.from_file(pdf_path)
-                    txt = open(f"{pdf_path.replace('pdf', 'txt')}", 'w', encoding = 'utf8')
+                    txt = open(f"{pdf_name.replace('pdf', 'txt')}", 'w', encoding = 'utf8')
                     print(parsed['content'].strip(), file = txt)
                     txt.close()
                     # pdf file delete
