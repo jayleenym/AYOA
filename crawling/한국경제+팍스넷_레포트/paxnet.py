@@ -53,7 +53,7 @@ for key in tickers.keys():
                     continue
                 
                 paxnet.loc[len(paxnet)] = [key, type_name[i], date[i], title[i], price[i], opinion[i], offer[i], file]
-                
+                pdf_name = f"./{key}/{date[i].replace('.', '-')}_{type_name[i]}_{offer[i]}_{opinion[i]}.pdf"
                 # pdf download
                 resp = download(f"{link}", headers=headers)
                 pdf_path = f'./{key}/{file}'
@@ -63,7 +63,7 @@ for key in tickers.keys():
 
                 # pdf to text
                 parsed = parser.from_file(pdf_path)
-                txt = open(f"{pdf_path.replace('pdf', 'txt')}", 'w', encoding = 'utf8')
+                txt = open(f"{pdf_name.replace('pdf', 'txt')}", 'w', encoding = 'utf8')
                 print(parsed['content'].strip(), file = txt)
                 txt.close()
                 # pdf file delete
